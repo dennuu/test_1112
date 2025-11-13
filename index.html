@@ -21,9 +21,19 @@
             position: fixed; top: 0; left: 0; background-color: #000000; z-index: 100;
             transition: opacity 0.8s ease-out;
         }
-        .loading-bar-container { width: 200px; height: 30px; background-color: #f0f0f0; border-radius: 15px; overflow: hidden; border: 3px solid #f0f0f0; box-sizing: border-box; position: relative; }
-        .loading-bar { width: 0; height: 100%; background-color: #000000; border-radius: 10px; /* transition 속성 제거 - JS가 제어 */ }
-        .loding-text-in-bar { position: absolute; width: 100%; text-align: center; color: white; font-size: 16px; line-height: 24px; mix-blend-mode: difference; font-family: 'Press Start 2P', cursive; }
+        .loading-bar-container {
+            width: 200px; height: 30px; background-color: #f0f0f0; border-radius: 15px;
+            margin: 20px auto; overflow: hidden; border: 3px solid #f0f0f0; box-sizing: border-box; position: relative;
+        }
+        .loading-bar {
+            width: 0; height: 100%; background-color: #000000; border-radius: 10px;
+            transition: width 0.1s linear;
+        }
+        .loding-text-in-bar {
+            position: absolute; left: 50%; transform: translateX(-50%); color: white;
+            font-family: 'Press Start 2P', cursive; font-size: 16px; line-height: 24px;
+            mix-blend-mode: difference;
+        }
 
         /* --- 픽셀 트레일 배경 (유지) --- */
         #pixel-container {
@@ -47,22 +57,16 @@
             display: flex; justify-content: center; align-items: center; position: relative;
         }
         
-        /* --- ★★★ 헤더 & 푸터 재구성 ★★★ --- */
+        /* --- 헤더 & 푸터 (유지) --- */
         .page-header {
             position: fixed; width: 100%; top: 0; padding: 40px 0;
-            display: flex; justify-content: center; /* 메뉴 중앙 정렬 */
-            z-index: 5;
+            display: flex; justify-content: center; z-index: 5;
         }
-        .main-menu ul {
-            display: flex; list-style: none; padding: 0; margin: 0;
-        }
-        .main-menu li {
-            margin: 0 25px;
-        }
+        .main-menu ul { display: flex; list-style: none; padding: 0; margin: 0; }
+        .main-menu li { margin: 0 50px; }
         .main-menu a {
             color: #FFFFFF; text-decoration: none; font-size: 12px;
-            letter-spacing: 1px; text-transform: uppercase;
-            font-weight: 700; transition: opacity 0.2s;
+            letter-spacing: 1px; text-transform: uppercase; font-weight: 700; transition: opacity 0.2s;
         }
         .main-menu a:hover { opacity: 0.7; }
 
@@ -70,9 +74,7 @@
             position: fixed; width: calc(100% - 80px); padding: 0 40px 40px 40px; bottom: 0;
             display: flex; justify-content: space-between; align-items: center; z-index: 5;
         }
-        .footer-text {
-            font-size: 12px; letter-spacing: 1px; text-transform: uppercase;
-        }
+        .footer-text { font-size: 12px; letter-spacing: 1px; text-transform: uppercase; }
         .arrow-down { 
             width: 0; height: 0; border-left: 10px solid transparent; border-right: 10px solid transparent; 
             border-top: 10px solid white; animation: bounce 2s infinite; 
@@ -89,7 +91,6 @@
             font-family: 'Anton', sans-serif; font-size: clamp(4rem, 15vw, 12rem);
             line-height: 1; letter-spacing: 0.05em;
         }
-        .pixel-character { width: clamp(50px, 12vw, 120px); height: auto; margin: 0 1vw; image-rendering: pixelated; }
         .speech-bubble {
             font-family: 'Press Start 2P', cursive; background-color: #000; border: 4px solid #fff; padding: 10px 20px;
             border-radius: 8px; margin-bottom: 20px; position: relative; font-size: clamp(0.8rem, 2.5vw, 1.5rem);
@@ -98,7 +99,13 @@
             content: ''; position: absolute; bottom: -16px; left: 50%; transform: translateX(-50%);
             width: 0; height: 0; border: 8px solid transparent; border-top-color: #fff;
         }
-
+        .pixel-character {
+            width: clamp(80px, 20vw, 250px);
+            height: auto;
+            margin: 0 2vw;
+            image-rendering: pixelated;
+        }
+        
         /* --- 두 번째 페이지 스타일 (유지) --- */
         #second-page { align-items: flex-end; }
         .content-panel {
@@ -116,14 +123,18 @@
     </style>
 </head>
 <body>
-    <div id="loading-screen"><div class="loading-bar-container"><div class="loding-text-in-bar">LODING</div><div class="loading-bar" id="loadingBar"></div></div></div>
+    <div id="loading-screen">
+        <div class="loading-bar-container">
+            <div class="loding-text-in-bar">LODING</div>
+            <div class="loading-bar" id="loadingBar"></div>
+        </div>
+    </div>
     
     <div id="pixel-container"></div>
 
     <div id="page-container">
         <!-- 첫 번째 페이지 -->
         <section class="page" id="home-page">
-            <!-- ★★★ 헤더 재구성 ★★★ -->
             <header class="page-header">
                 <nav class="main-menu">
                     <ul>
@@ -134,13 +145,15 @@
                     </ul>
                 </nav>
             </header>
-
             <main class="main-content">
                 <div class="speech-bubble">CLICK!!</div>
-                <div class="name-container"><span>HELLO</span><img src="https://i.imgur.com/MJAk21B.png" alt="Pixel Art Character" class="pixel-character"><span>UJUNG</span></div>
+                <div class="name-container">
+                    <span>HELLO</span>
+                    <!-- ★★★ 이미지 경로 수정 ★★★ -->
+                    <img src="02.png" alt="Pixel Heart UDEN" class="pixel-character">
+                    <span>UJUNG</span>
+                </div>
             </main>
-
-            <!-- ★★★ 푸터 재구성 ★★★ -->
             <footer class="page-footer">
                 <div class="footer-text">HELLO@uden.COM</div>
                 <div class="arrow-down"></div>
@@ -157,33 +170,29 @@
     </div>
 
     <script>
+        // --- JavaScript는 이전과 동일하며, 수정할 필요가 없습니다. ---
         const loadingBar = document.getElementById('loading-bar'), loadingScreen = document.getElementById('loading-screen'), pixelContainer = document.getElementById('pixel-container');
         let currentPageIndex = 0; 
-        
-        // ★★★ 1. 로딩 바 애니메이션 복구 (초기 코드로) ★★★
         window.onload = () => {
-            let width = 0;
-            let animId;
-            function frame() {
+            const loadingBar = document.getElementById('loadingBar');
+            let width = 0, animId;
+            function simulateLoading() {
                 if (width >= 100) {
                     cancelAnimationFrame(animId);
                     loadingScreen.style.opacity = '0';
                     setTimeout(() => {
                         loadingScreen.style.display = 'none';
-                        startPixelTrail();
-                        initPageTransitions();
-                        // initShuffleAnimation()은 더 이상 여기서 호출할 필요 없음
+                        startPixelTrail(); initPageTransitions();
                     }, 800);
                 } else {
-                    width += 0.5; // 속도 조절 (숫자가 클수록 빠름)
+                    width += 0.5;
                     loadingBar.style.width = width + '%';
-                    animId = requestAnimationFrame(frame);
+                    animId = requestAnimationFrame(simulateLoading);
                 }
             }
-            animId = requestAnimationFrame(frame);
+            animId = requestAnimationFrame(simulateLoading);
         };
-        
-        function startPixelTrail() { /* ... 이전과 동일 ... */
+        function startPixelTrail() {
             const PIXEL_SIZE = 16, BLOCK_GRID_SIZE = 5, SMOOTHING_FACTOR = 0.1, DISTANCE_THRESHOLD = 30;
             let mouse = { x: window.innerWidth/2, y: window.innerHeight/2 }, trail = { x: window.innerWidth/2, y: window.innerHeight/2 }, lastBlockPosition = { x: -999, y: -999 };
             window.addEventListener('mousemove', e => { if (currentPageIndex !== 0) return; mouse.x = e.clientX; mouse.y = e.clientY; });
@@ -206,8 +215,7 @@
             };
             animate();
         }
-
-        function initPageTransitions() { /* ... 이전과 동일 ... */
+        function initPageTransitions() {
             const container = document.getElementById('page-container'), contentPanel = document.querySelector('.content-panel'), total = container.children.length;
             let isAnimating = false;
             window.addEventListener('wheel', e => {
@@ -224,9 +232,8 @@
                 }
             });
         }
-        
         let shuffleHasRun = false; 
-        function triggerShuffle() { /* ... 이전과 동일 ... */
+        function triggerShuffle() {
             if (shuffleHasRun) return; 
             shuffleHasRun = true; 
             const textElement = document.querySelector('.shuffle-text'), letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
