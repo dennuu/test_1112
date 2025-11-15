@@ -8,45 +8,28 @@
         @import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
         @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap');
         @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Lora:wght@400;700&display=swap');
+
+        @font-face {
+            font-family: 'Determination';
+            src: url('determination.ttf') format('truetype');
+        }
+        @font-face {
+            font-family: 'IBMPlexSansKR';
+            src: url('IBMPlexSansKR-Medium.ttf') format('truetype');
+        }
 
         html, body {
             margin: 0; padding: 0; width: 100%; height: 100vh;
             background-color: #000000; overflow: hidden; color: #FFFFFF;
-            font-family: 'Roboto Mono', monospace; cursor: none;
+            font-family: 'Roboto Mono', monospace; 
+            cursor: none;
         }
         
-        /* --- 로딩 스크린 (유지) --- */
-        #loading-screen {
-            display: flex; justify-content: center; align-items: center; width: 100%; height: 100%;
-            position: fixed; top: 0; left: 0; background-color: #000000; z-index: 100;
-            transition: opacity 0.8s ease-out;
-        }
-        .loading-bar-container {
-            width: 200px; height: 30px; background-color: #f0f0f0; border-radius: 15px;
-            margin: 20px auto; overflow: hidden; border: 3px solid #f0f0f0; box-sizing: border-box; position: relative;
-        }
-        .loading-bar {
-            width: 0; height: 100%; background-color: #000000; border-radius: 10px;
-            transition: width 0.1s linear;
-        }
-        .loding-text-in-bar {
-            position: absolute; left: 50%; transform: translateX(-50%); color: white;
-            font-family: 'Press Start 2P', cursive; font-size: 16px; line-height: 24px;
-            mix-blend-mode: difference;
-        }
-
-        /* --- 픽셀 트레일 배경 (유지) --- */
-        #pixel-container {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            z-index: 1; pointer-events: none;
-        }
-        .pixel {
-            position: fixed; width: 16px; height: 16px; background-color: #FFFFFF;
-            opacity: 1; pointer-events: none; animation: fadeOutAndShrink 0.7s ease-out forwards;
-        }
+        #pixel-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; }
+        .pixel { position: fixed; width: 16px; height: 16px; background-color: #FFFFFF; opacity: 1; pointer-events: none; animation: fadeOutAndShrink 0.7s ease-out forwards; }
         @keyframes fadeOutAndShrink { from { opacity: 1; transform: scale(1); } to { opacity: 0; transform: scale(0); } }
 
-        /* --- 페이지 전환 컨테이너 (유지) --- */
         #page-container {
             width: 100%; height: 100%;
             transition: transform 0.8s cubic-bezier(0.77, 0, 0.175, 1);
@@ -55,25 +38,30 @@
         .page {
             width: 100vw; height: 100vh;
             display: flex; justify-content: center; align-items: center; position: relative;
+            overflow: hidden;
+            box-sizing: border-box;
         }
         
-        /* --- 헤더 & 푸터 (유지) --- */
         .page-header {
-            position: fixed; width: 100%; top: 0; padding: 40px 0;
-            display: flex; justify-content: center; z-index: 5;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            padding: 40px 0;
+            display: flex;
+            justify-content: center;
+            z-index: 100;
         }
         .main-menu ul { display: flex; list-style: none; padding: 0; margin: 0; }
         .main-menu li { margin: 0 50px; }
         .main-menu a {
             color: #FFFFFF; text-decoration: none; font-size: 12px;
-            letter-spacing: 1px; text-transform: uppercase; font-weight: 700; transition: opacity 0.2s;
+            letter-spacing: 1px; text-transform: uppercase; font-weight: 700;
+            transition: opacity 0.2s;
+            cursor: none;
         }
         .main-menu a:hover { opacity: 0.7; }
 
-        .page-footer {
-            position: fixed; width: calc(100% - 80px); padding: 0 40px 40px 40px; bottom: 0;
-            display: flex; justify-content: space-between; align-items: center; z-index: 5;
-        }
+        .page-footer { position: fixed; width: calc(100% - 80px); padding: 0 40px 40px 40px; bottom: 0; display: flex; justify-content: space-between; align-items: center; z-index: 100; }
         .footer-text { font-size: 12px; letter-spacing: 1px; text-transform: uppercase; }
         .arrow-down { 
             width: 0; height: 0; border-left: 10px solid transparent; border-right: 10px solid transparent; 
@@ -81,118 +69,196 @@
         }
         @keyframes bounce { 0%, 20%, 50%, 80%, 100% {transform: translateY(0);} 40% {transform: translateY(-10px);} 60% {transform: translateY(-5px);} }
         
-        /* --- 첫 번째 페이지 중앙 콘텐츠 (유지) --- */
-        .main-content {
-            display: flex; flex-direction: column; justify-content: center; align-items: center;
-            height: 100%; text-align: center; position: relative; z-index: 2;
+        .main-content { display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100%; text-align: center; position: relative; z-index: 2; }
+        .name-container { display: flex; align-items: center; justify-content: center; font-family: 'Determination', sans-serif; font-size: clamp(4rem, 15vw, 12rem); line-height: 1; letter-spacing: 0.05em; }
+        .speech-bubble { font-family: 'Press Start 2P', cursive; background-color: #000; border: 4px solid #fff; padding: 10px 20px; border-radius: 8px; margin-bottom: 20px; position: relative; font-size: clamp(0.8rem, 2.5vw, 1.5rem); }
+        .speech-bubble::after { content: ''; position: absolute; bottom: -16px; left: 50%; transform: translateX(-50%); width: 0; height: 0; border: 8px solid transparent; border-top-color: #fff; }
+        .folder-wrapper { transform: scale(0.9); margin: 0 1vw; }
+        .folder { position: relative; width: 200px; height: 140px; cursor: pointer; }
+        .folder-back, .folder-front { position: absolute; width: 100%; height: 100%; background-color: #77C8F1; border-radius: 12px; transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55); }
+        .folder-back::before { content: ''; position: absolute; top: -12px; left: 15px; width: 70px; height: 24px; background-color: #77C8F1; border-radius: 8px 8px 0 0; }
+        .folder-front { transform-origin: bottom; z-index: 10; }
+        .paper-container { position: absolute; bottom: 0; left: 0; width: 100%; height: 90%; display: flex; justify-content: center; align-items: flex-end; z-index: 5; transform: translateY(100%); opacity: 0; transition: transform 0.5s ease-out 0.1s, opacity: 0.3s 0.1s; }
+        .paper { position: absolute; height: 95%; border-radius: 10px 10px 0 0; }
+        .paper:nth-child(3) { background-color: #fff; width: 85%; }
+        .paper:nth-child(2) { background-color: #f2f2f2; width: 92%; transform: translateY(5px); }
+        .paper:nth-child(1) { background-color: #e6e6e6; width: 100%; transform: translateY(10px); }
+        .folder.is-open .folder-front { transform: scaleY(0.4) translateY(60px); }
+        .folder.is-open .paper-container { transform: translateY(0); opacity: 1; }
+        
+        #second-page, #third-page {
+            background-color: #f0f0f0; color: #111;
+            align-items: flex-start; overflow-y: auto;
         }
-        .name-container {
-            display: flex; align-items: center; justify-content: center;
-            font-family: 'Anton', sans-serif; font-size: clamp(4rem, 15vw, 12rem);
-            line-height: 1; letter-spacing: 0.05em;
+        #third-page { background-color: #FFD900; }
+
+        .work-detail-container { width: 100%; padding-bottom: 10vh; }
+        
+        .work-header {
+            width: 100%;
+            height: 120px;
+            position: relative;
+            margin-bottom: 20px;
         }
-        .speech-bubble {
-            font-family: 'Press Start 2P', cursive; background-color: #000; border: 4px solid #fff; padding: 10px 20px;
-            border-radius: 8px; margin-bottom: 20px; position: relative; font-size: clamp(0.8rem, 2.5vw, 1.5rem);
-        }
-        .speech-bubble::after {
-            content: ''; position: absolute; bottom: -16px; left: 50%; transform: translateX(-50%);
-            width: 0; height: 0; border: 8px solid transparent; border-top-color: #fff;
-        }
-        .pixel-character {
-            width: clamp(80px, 20vw, 250px);
-            height: auto;
-            margin: 0 2vw;
-            image-rendering: pixelated;
+        .header-bar {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 80px;
+            background-color: #111;
+            display: flex; justify-content: center; align-items: center;
+            z-index: 2;
         }
         
-        /* --- 두 번째 페이지 스타일 (유지) --- */
-        #second-page { align-items: flex-end; }
-        .content-panel {
-            width: 95%; height: 80vh; background-color: #E0E0E0;
-            border-top-left-radius: 40px; border-top-right-radius: 40px;
-            position: relative; display: flex; justify-content: center;
-            opacity: 0; transform: translateY(100%);
-            transition: opacity 0.8s ease-out, transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+        .header-tag-left {
+            position: absolute; bottom: 0; left: 5%;
+            background-color: #f0f0f0; color: #111;
+            padding: 15px 30px; font-size: 14px;
+            text-transform: uppercase; font-weight: 700;
+            z-index: 3;
+            clip-path: polygon(0 0, calc(100% - 20px) 0, 100% 20px, 100% 100%, 0 100%);
         }
-        .content-panel.visible { opacity: 1; transform: translateY(0); }
-        .shuffle-text {
-            font-family: 'Anton', sans-serif; font-size: clamp(2rem, 6vw, 5rem);
-            letter-spacing: 0.1em; color: #000; padding-top: 5vh;
+        #third-page .header-tag-left { background-color: #FFD900; }
+        #third-page .header-tag-right {
+            position: absolute; bottom: 0; right: 5%;
+            background-color: #222; color: #fff;
+             padding: 15px 30px; font-size: 14px;
+            text-transform: uppercase; font-weight: 700;
+            z-index: 3;
+            clip-path: polygon(20px 0, 100% 0, 100% 100%, 0 100%);
         }
+        
+        .work-grid {
+            width: 90%; margin: 0 auto; display: grid;
+            grid-template-columns: 3fr 2fr; gap: 50px; align-items: flex-start;
+        }
+        .grid-left h1 {
+            font-family: 'IBMPlexSansKR', sans-serif;
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            margin: 0 0 20px 0; line-height: 1.2; font-weight: 500;
+        }
+        #third-page .grid-left h1 { font-family: 'Lora', serif; }
+        .grid-left .divider, .grid-right .divider { border-bottom: 1px dotted #aaa; margin: 20px 0; }
+        .grid-left .description { font-size: 14px; line-height: 1.6; max-width: 450px; }
+        .grid-left .view-project { display: inline-block; margin-top: 30px; font-weight: 700; text-decoration: none; color: #111; }
+        
+        .grid-right .metadata { font-size: 12px; text-transform: uppercase; text-align: right; }
+        .grid-right .metadata p { margin: 5px 0 15px 0; }
+        .image-gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        
+        .tilt-card { border-radius: 8px; transition: transform 0.1s ease-out; will-change: transform; }
+        .main-image-wrapper, .gallery-img-wrapper { perspective: 1000px; }
+        
+        .main-image {
+            width: 67%; 
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
+        #third-page .main-image { width: 100%; }
+        .gallery-img { width: 100%; height: auto; display: block; }
+        
     </style>
 </head>
 <body>
-    <div id="loading-screen">
-        <div class="loading-bar-container">
-            <div class="loding-text-in-bar">LODING</div>
-            <div class="loading-bar" id="loadingBar"></div>
-        </div>
-    </div>
-    
     <div id="pixel-container"></div>
+    
+    <header class="page-header">
+        <nav class="main-menu">
+            <ul>
+                <li><a href="#" id="nav-home">HOME</a></li>
+                <li><a href="#" id="nav-work">WORK</a></li>
+                <li><a href="#">ABOUT</a></li>
+                <li><a href="#">CONTACT</a></li>
+            </ul>
+        </nav>
+    </header>
 
     <div id="page-container">
-        <!-- 첫 번째 페이지 -->
+        <!-- First Page -->
         <section class="page" id="home-page">
-            <header class="page-header">
-                <nav class="main-menu">
-                    <ul>
-                        <li><a href="#">HOME</a></li>
-                        <li><a href="#">WORK</a></li>
-                        <li><a href="#">ABOUT</a></li>
-                        <li><a href="#">CONTACT</a></li>
-                    </ul>
-                </nav>
-            </header>
             <main class="main-content">
                 <div class="speech-bubble">CLICK!!</div>
                 <div class="name-container">
                     <span>HELLO</span>
-                    <!-- ★★★ 이미지 경로 수정 ★★★ -->
-                    <img src="02.png" alt="Pixel Heart UDEN" class="pixel-character">
+                    <div class="folder-wrapper"><div class="folder"><div class="folder-back"><div class="paper-container"><div class="paper"></div><div class="paper"></div><div class="paper"></div></div></div><div class="folder-front"></div></div></div>
                     <span>UJUNG</span>
                 </div>
             </main>
-            <footer class="page-footer">
-                <div class="footer-text">HELLO@uden.COM</div>
-                <div class="arrow-down"></div>
-                <div class="footer-text">LINKEDIN.COM/IN/uden</div>
-            </footer>
+            <footer class="page-footer"><div class="footer-text">HELLO@uden.COM</div><div class="arrow-down"></div><div class="footer-text">LINKEDIN.COM/IN/uden</div></footer>
         </section>
-
-        <!-- 두 번째 페이지 -->
+        <!-- Second Page -->
         <section class="page" id="second-page">
-            <div class="content-panel">
-                <h1 class="shuffle-text" data-value="My project">My project</h1>
+            <div class="work-detail-container">
+                <header class="work-header">
+                    <div class="header-bar"></div>
+                    <div class="header-tag-left">Work 01</div>
+                </header>
+                <div class="work-grid">
+                    <div class="grid-left">
+                        <h1>페이북 앱 리디자인 프로젝트</h1>
+                        <div class="divider"></div>
+                        <p class="description"><br>실제 사용 과정에서 느껴진 불편함을 기반으로, 정보 구조를 재정비하고 <br>주요 기능의 접근성을 높여 더 직관적인 결제 경험을 제공하는 방향으로 <br>리디자인했습니다.</p>
+                        <a href="#" class="view-project">View Project →</a>
+                        <div class="main-image-wrapper"><img src="paybook2.png" class="main-image tilt-card" alt="Main project image"></div>
+                    </div>
+                    <div class="grid-right">
+                        <div class="metadata"><p>2025</p><p>UI/UX</p><p>paybooc redesign</p></div>
+                        <div class="divider"></div>
+                        <div class="image-gallery">
+                            <div class="gallery-img-wrapper"><img src="paybook.png" class="gallery-img tilt-card" alt="paybook app preview"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Third Page -->
+        <section class="page" id="third-page">
+            <div class="work-detail-container">
+                <header class="work-header">
+                     <div class="header-bg header-bg-grey"></div>
+                    <div class="work-header-inner">
+                         <div class="header-tags-container">
+                            <div class="header-tag header-tag-left">Featured Work 02</div>
+                            <div class="header-tag header-tag-right">See All Works →</div>
+                        </div>
+                    </div>
+                </header>
+                <div class="work-grid">
+                    <div class="grid-left">
+                        <h1>Autumn Things</h1>
+                        <div class="divider"></div>
+                        <p class="description">A project focused on recreating a painterly faux 2D oil painting effect in 3D using hand-painted textures, UV mapping, and rendering techniques.</p>
+                        <a href="#" class="view-project">View Project →</a>
+                        <div class="main-image-wrapper"><img src="https://assets-global.website-files.com/6451a1a473956a63c46a484c/646c879571b76536f96617a2_AutumnThings_Main-p-2000.jpg" class="main-image tilt-card" alt="Autumn Things main image"></div>
+                    </div>
+                    <div class="grid-right">
+                        <div class="metadata"><p>2024</p><p>Motion Works</p><p>Htic, Motion Poster, 3D Modeling, 3D Texturing</p></div>
+                        <div class="divider"></div>
+                        <div class="image-gallery">
+                            <div class="gallery-img-wrapper"><img src="https://assets-global.website-files.com/6451a1a473956a63c46a484c/646c87a5330a59d99cf29180_AutumnThings_Assets_01-p-500.jpg" class="gallery-img tilt-card" alt="gallery image"></div>
+                            <div class="gallery-img-wrapper"><img src="https://assets-global.website-files.com/6451a1a473956a63c46a484c/646c87a5e947c64b63e12c1a_AutumnThings_Assets_02-p-500.jpg" class="gallery-img tilt-card" alt="gallery image"></div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
     </div>
 
     <script>
-        // --- JavaScript는 이전과 동일하며, 수정할 필요가 없습니다. ---
-        const loadingBar = document.getElementById('loading-bar'), loadingScreen = document.getElementById('loading-screen'), pixelContainer = document.getElementById('pixel-container');
+        const pixelContainer = document.getElementById('pixel-container');
         let currentPageIndex = 0; 
+        
         window.onload = () => {
-            const loadingBar = document.getElementById('loadingBar');
-            let width = 0, animId;
-            function simulateLoading() {
-                if (width >= 100) {
-                    cancelAnimationFrame(animId);
-                    loadingScreen.style.opacity = '0';
-                    setTimeout(() => {
-                        loadingScreen.style.display = 'none';
-                        startPixelTrail(); initPageTransitions();
-                    }, 800);
-                } else {
-                    width += 0.5;
-                    loadingBar.style.width = width + '%';
-                    animId = requestAnimationFrame(simulateLoading);
-                }
-            }
-            animId = requestAnimationFrame(simulateLoading);
+            startPixelTrail();
+            initPageTransitions();
+            initFolder();
+            initTiltAnimation();
         };
-        function startPixelTrail() {
+        
+        function initFolder() { 
+            const folder = document.querySelector('.folder');
+            folder.addEventListener('click', () => { folder.classList.toggle('is-open'); });
+        }
+        function startPixelTrail() { 
             const PIXEL_SIZE = 16, BLOCK_GRID_SIZE = 5, SMOOTHING_FACTOR = 0.1, DISTANCE_THRESHOLD = 30;
             let mouse = { x: window.innerWidth/2, y: window.innerHeight/2 }, trail = { x: window.innerWidth/2, y: window.innerHeight/2 }, lastBlockPosition = { x: -999, y: -999 };
             window.addEventListener('mousemove', e => { if (currentPageIndex !== 0) return; mouse.x = e.clientX; mouse.y = e.clientY; });
@@ -215,39 +281,58 @@
             };
             animate();
         }
+
         function initPageTransitions() {
-            const container = document.getElementById('page-container'), contentPanel = document.querySelector('.content-panel'), total = container.children.length;
+            const container = document.getElementById('page-container');
+            const total = container.children.length;
             let isAnimating = false;
+
+            const scrollToPage = (pageIndex) => {
+                if (isAnimating || pageIndex < 0 || pageIndex >= total || currentPageIndex === pageIndex) return;
+                
+                currentPageIndex = pageIndex;
+                isAnimating = true;
+                container.style.transform = `translateY(-${currentPageIndex * 100}vh)`;
+                document.body.style.cursor = (currentPageIndex > 0) ? 'auto' : 'none';
+                
+                setTimeout(() => isAnimating = false, 1000);
+            };
+
             window.addEventListener('wheel', e => {
-                if (isAnimating) return;
-                const dir = e.deltaY > 0 ? 1 : -1;
-                let nextPageIndex = currentPageIndex + dir;
-                if (nextPageIndex >= 0 && nextPageIndex < total) {
-                    currentPageIndex = nextPageIndex;
-                    isAnimating = true;
-                    container.style.transform = `translateY(-${currentPageIndex * 100}vh)`;
-                    if (currentPageIndex === 1) { contentPanel.classList.add('visible'); triggerShuffle(); } 
-                    else { contentPanel.classList.remove('visible'); }
-                    setTimeout(() => isAnimating = false, 800);
+                const currentPage = container.children[currentPageIndex];
+                if (currentPageIndex > 0 && (currentPage.scrollTop > 0 || e.deltaY > 0)) {
+                    if (currentPage.scrollTop === 0 && e.deltaY < 0) {} 
+                    else { return; }
                 }
+                
+                const dir = e.deltaY > 0 ? 1 : -1;
+                scrollToPage(currentPageIndex + dir);
+            });
+            
+            document.getElementById('nav-home').addEventListener('click', (e) => {
+                e.preventDefault();
+                scrollToPage(0);
+            });
+            document.getElementById('nav-work').addEventListener('click', (e) => {
+                e.preventDefault();
+                scrollToPage(1);
             });
         }
-        let shuffleHasRun = false; 
-        function triggerShuffle() {
-            if (shuffleHasRun) return; 
-            shuffleHasRun = true; 
-            const textElement = document.querySelector('.shuffle-text'), letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-            let interval = null, iteration = 0;
-            const originalText = textElement.dataset.value;
-            interval = setInterval(() => {
-                textElement.innerText = originalText.split("").map((letter, index) => {
-                    if (index < iteration) return originalText[index];
-                    return letters[Math.floor(Math.random() * 26)];
-                }).join("");
-                if (iteration >= originalText.length) clearInterval(interval);
-                iteration += 1 / 3;
-            }, 30);
+
+        function initTiltAnimation() {
+            const cards = document.querySelectorAll('.tilt-card');
+            cards.forEach(card => {
+                card.addEventListener('mousemove', e => {
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left - rect.width / 2;
+                    const y = e.clientY - rect.top - rect.height / 2;
+                    const rotateX = -y / 20;
+                    const rotateY = x / 20;
+                    card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+                });
+                card.addEventListener('mouseleave', () => { card.style.transform = 'rotateX(0deg) rotateY(0deg)'; });
+            });
         }
     </script>
 </body>
-</html>
+</html>```
